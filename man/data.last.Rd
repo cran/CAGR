@@ -7,11 +7,11 @@
 data.last(data.1, r, n)
 }
 \arguments{
-\item{data.1}{data of the first year}
+\item{data.1}{Data of the first year}
 
 \item{r}{CAGR}
 
-\item{n}{number of years}
+\item{n}{Number of years}
 }
 \value{
 Last year data and between years values

@@ -7,9 +7,9 @@
 n.years(data.1, data.n, r)
 }
 \arguments{
-\item{data.1}{data of the first year}
+\item{data.1}{Data of the first year}
 
-\item{data.n}{data of the last year}
+\item{data.n}{Data of the last year}
 
 \item{r}{CAGR}
 }

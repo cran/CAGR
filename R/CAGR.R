@@ -2,16 +2,15 @@
 
 #' @title Compute CAGR(Compound Annual Growth Rate)
 #' @description Compute CAGR(Compound Annual Growth Rate)
-#' @param data.1 data of the first year
-#' @param data.n data of the last year
-#' @param n number of years
+#' @param data.1 Data of the first year
+#' @param data.n Data of the last year
+#' @param n Number of years
 #'
 #' @return CAGR and between years values
 #' @export
 #' @usage CAGR(data.1, data.n, n)
 #' @examples c.cagr<-CAGR(100, 189, 5)
 #' @references Bardhan, D., Singh, S.R.K., Raut, A.A.and Athare, T.R. (2022). Livestock in Madhya Pradesh and Chhattisgarh: An Analysis for Some Policy Implications. Agricultural Science Digest. DOI:10.18805/ag.D-5418.
-
 
 CAGR <- function(data.1, data.n, n){
 
@@ -40,9 +39,9 @@ CAGR <- function(data.1, data.n, n){
 #' @description Computing last year data
 #'
 #'
-#' @param data.1 data of the first year
+#' @param data.1 Data of the first year
 #' @param r CAGR
-#' @param n number of years
+#' @param n Number of years
 #'
 #' @return Last year data and between years values
 #' @export
@@ -73,9 +72,9 @@ data.last<-function(data.1, r, n){
 #' @description Computing first year data
 #'
 #'
-#' @param data.n data of the last year
+#' @param data.n Data of the last year
 #' @param r CAGR
-#' @param n number of years
+#' @param n Number of years
 #'
 #' @return First year data and between years values
 #' @export
@@ -101,14 +100,45 @@ data.first<-function(data.n, r, n){
 
 
 
+#' @title Log-linear Trend Model
+#' @description Estimating the growth rate using the log-linear trend model
+#'
+#' @param data Time series data set
+#' @import stats
+#' @return Growth rate and model summary
+#' @export
+#' @usage LLTM(data)
+#' @examples
+#' data<- c(100,105,110,118,116,120,130)
+#' g.rate <- LLTM(data)
+#' @references Bardhan, D., Singh, S.R.K., Raut, A.A.and Athare, T.R. (2022). Livestock in Madhya Pradesh and Chhattisgarh: An Analysis for Some Policy Implications. Agricultural Science Digest. DOI:10.18805/ag.D-5418.
+
+LLTM <- function(data) {
+  t <- length(data)
+  y <- log(data)
+  x<- seq(1:t)
+  ll.model <- stats::lm(y ~ x)
+  s <- summary(ll.model)
+  b <- unname(ll.model$coefficients[2])
+  r<- (exp(b) - 1)*100
+
+  output<- list(growth_rate = r, model_summary = s)
+  return(output)
+}
+
+
+
+
+
+
 
 
 
 #' @title Computing Number of Years
 #' @description Computing number of years
 #'
-#' @param data.1 data of the first year
-#' @param data.n data of the last year
+#' @param data.1 Data of the first year
+#' @param data.n Data of the last year
 #' @param r CAGR
 #'
 #' @return Number of years and between years values
@@ -132,7 +162,6 @@ n.years<-function(data.1, data.n, r){
   Output_CAGR <- list(n, Values = y)
   return(Output_CAGR)
 }
-
 
 
 
